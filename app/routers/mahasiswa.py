@@ -7,12 +7,6 @@ router = APIRouter(
     tags=["Mahasiswa"]
 )
 
-# @router.post("/register", response_model=schemas.ResponseMessage)
-# def daftar_sidang(mahasiswa: schemas.MahasiswaCreate, db: Session = Depends(database.get_db)):
-#     if crud.get_mahasiswa_by_npm(db, mahasiswa.npm) or crud.get_mahasiswa_by_no_telp(db, mahasiswa.no_telp) or crud.get_mahasiswa_by_email(db, mahasiswa.email):
-#         raise HTTPException(status_code=400, detail="NPM, No Telp atau Email sudah terdaftar")
-#     return crud.create_mahasiswa(db, mahasiswa)
-
 @router.post("/register", response_model=schemas.ResponseMessage)
 def daftar_sidang(mahasiswa: schemas.MahasiswaCreate, db: Session = Depends(database.get_db)):
     existing_npm = db.query(models.Mahasiswa.npm).all()
